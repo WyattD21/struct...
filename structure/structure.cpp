@@ -3,6 +3,22 @@
 #include <fstream>
 #include <string>
 
+// Program Overview:
+//    
+// This program reads data from an input file named "runners.txt", which contains information
+// about each runner's name and the number of miles they run each day. The program then calculates
+// the total miles and average miles run by each runner over the course of a week (7 days). Finally,
+// it displays the results in a formatted table, including each runner's name, miles run each day,
+// total miles for the week, and average miles run per day.
+//
+// Input:
+// - Data file named "runners.txt" containing runner names and miles run each day.
+//
+// Output:
+// - Formatted table displaying each runner's name, miles run each day, total miles for the week,
+//   and average miles run per day.
+
+
 const int NUM_RUNNERS = 5;
 const int NUM_DAYS = 7;
 
@@ -13,15 +29,25 @@ struct Runner {
     double averageMiles;
 };
 
-void readData(Runner runners[]);
-void calculateStats(Runner runners[]);
-void displayResults(const Runner runners[]);
+void readData(Runner runners[]); // Precondition: 'runners' array is allocated and contains enough space for NUM_RUNNERS runners.
+// Postcondition: 'runners' array is populated with data read from the input file.
+
+void calculateStats(Runner runners[]); // Precondition: 'runners' array is populated with valid data from readData().
+// Postcondition: Total and average miles are calculated and stored in each runner's struct.
+
+void displayResults(const Runner runners[]); // Precondition: 'runners' array is populated with valid data and total/average miles are calculated.
+// Postcondition: Results are displayed to the console in a formatted table.
+
 
 int main() {
-    Runner runners[NUM_RUNNERS];
+    const int numRunners = NUM_RUNNERS;
+    const int numDays = NUM_DAYS;
+    Runner runners[numRunners];
+
     readData(runners);
     calculateStats(runners);
     displayResults(runners);
+
     return 0;
 }
 
@@ -76,4 +102,3 @@ void displayResults(const Runner runners[]) {
         std::cout << std::setw(12) << std::right << std::fixed << std::setprecision(2) << runners[i].averageMiles << std::endl;
     }
 }
-
